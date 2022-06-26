@@ -9,11 +9,17 @@
    - The field list is user orderable
    - Fields may be hidden or displayed
    - Fields may link to external URLs
+5. `FUTURE:` Multiple accounts linked to one event list - for family option
 
 ## Front End Web Application
 1. Requires user registration with email address and username
 2. Login via either email addrss or username
 3. Password complexity: 8 char, one uppercase, one lowercase one of: $#!@%
+
+## Web Link Display of Event List
+1. Unique English readable URL format: http://eventlist.com/ev/username/myeventlistname
+2. No token required
+3. Can be password protected (for family calendars)
 
 ## REST API
 1. REST API requires a token per event list
