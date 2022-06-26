@@ -1,6 +1,6 @@
 # Event List V1 - Requirements
 
-## Gemeral Feature Requirements
+## General Feature Requirements
 1. User account required
 2. Multiple event lists available per user account
 3. Event list has a title and multiple events
