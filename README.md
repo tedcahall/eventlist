@@ -2,13 +2,14 @@
 A service to manage and display your list of events
 
 ## Event List Main Features
-- Web based list of events
+- FREE Web based list of events
+- E-mail or username user account authentication
 - Multiple event calendars per user
 - Embeddable by javascript or an iframe
   - Embed into websites
   - Facebook
   - Twitter
-- Each evbent has the following properties
+- Each event has the following properties:
   - Title
   - Multiple Event Lines with:
     - Date
