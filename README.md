@@ -7,6 +7,7 @@ A service to manage and display your list of events
 - Multiple event calendars per user
 - REST API
 - Javascript SDK
+- Share as simple URL
 - Embeddable by javascript or an iframe
   - Embed into websites
   - Facebook
