@@ -18,3 +18,6 @@ A service to manage and display your list of events
     - Event Name
     - Location
     - Other
+
+## Example Event List from MARRS Points application
+![](docs/MARRS-2022.png)
