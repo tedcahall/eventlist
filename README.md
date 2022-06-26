@@ -5,6 +5,8 @@ A service to manage and display your list of events
 - FREE Web based list of events
 - E-mail or username user account authentication
 - Multiple event calendars per user
+- REST API
+- Javascript SDK
 - Embeddable by javascript or an iframe
   - Embed into websites
   - Facebook
