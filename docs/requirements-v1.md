@@ -6,7 +6,7 @@
 3. Event list has a title and multiple events
 4. An Event has multiple fields
    - Each field may have a custom name
-   - The field list is user ordrable
+   - The field list is user orderable
    - Fields may be hidden or displayed
    - Fields may link to external URLs
 
