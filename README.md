@@ -14,7 +14,7 @@ A service to manage and display your list of events
 - Each event has the following properties:
   - Title
   - Multiple Event Lines with:
-    - Date
+    - Date (Selectable formats)
     - Event Name
     - Location
     - Other
