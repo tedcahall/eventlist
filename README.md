@@ -5,7 +5,7 @@ A service to manage and display your list of events.  Build your list of events 
 - FREE Web based list of events
 - Multiple event calendars per user
 - E-mail or username user account authentication
-- Share as simple URL
+- Share as simple URL or embed into a website or your favorite social network
 - Each event has the following properties:
   - Event List Title
   - Multiple Event with configurable columns:
