@@ -8,7 +8,7 @@ A service to manage and display your list of events.  Build your list of events 
 - Share as simple URL or embed into a website or your favorite social network
 - Each event has the following properties:
   - Event List Title
-  - Multiple Event with configurable columns:
+  - Multiple Events with configurable columns:
     - Date (Selectable formats)
     - Event Name (Linkable to external websites/URLs)
     - Location (Linkable to map location)
