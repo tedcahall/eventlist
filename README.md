@@ -1,5 +1,5 @@
 # eventlist
-A service to manage and display your list of events
+A service to manage and display your list of events.  BUild your list of events once, display it across multiple websites and services.
 
 ## Event List Main Features
 - FREE Web based list of events
