@@ -13,7 +13,7 @@ A service to manage and display your list of events
   - Facebook
   - Twitter
 - Each event has the following properties:
-  - Title
+  - Event List Title
   - Multiple Event Lines with:
     - Date (Selectable formats)
     - Event Name
