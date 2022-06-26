@@ -21,6 +21,7 @@ A service to manage and display your list of events.  Build your list of events 
   - Embed into websites
   - Facebook
   - Twitter
+- [Requirements](docs/requirements-v1.md)
 
 ## Example Event List from [MARRS Points](http://marrspoints.com/) application
 ![](docs/MARRS-2022.png)
