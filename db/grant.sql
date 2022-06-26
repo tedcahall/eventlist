@@ -6,5 +6,5 @@
 # cs means 'case sensitive' which is needed for an index that is case sensitive like Plaid trans_id and account_id
 
 CREATE DATABASE IF NOT EXISTS eventlist DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-CREATE USER 'eventadmin'@'localhost' IDENTIFIED BY 'EventAdmin1959$';
+CREATE USER 'eventadmin'@'localhost' IDENTIFIED BY 'xxxxxxxxxx';
 GRANT ALL on eventlist.* to 'eventadmin'@'localhost';
