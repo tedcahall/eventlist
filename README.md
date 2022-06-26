@@ -16,8 +16,8 @@ A service to manage and display your list of events
   - Event List Title
   - Multiple Event Lines with:
     - Date (Selectable formats)
-    - Event Name
-    - Location
+    - Event Name (Linkable to external websites/URLs)
+    - Location (Linkable to map location)
     - Other
 
 ## Example Event List from [MARRS Points](http://marrspoints.com/) application
