@@ -30,8 +30,10 @@ create table IF NOT EXISTS eventlist_title (
     evdate_hdr varchar(30) DEFAULT "Date",
     evname_hdr varchar(30) DEFAULT "Event",
     evlocation_hdr varchar(30) DEFAULT "Location",
-    evother1_name varchar(30),
-    evother2_name varchar(30),
+    evother1_hdr varchar(30) DEFAULT "Other 1",
+    evother2_hdr varchar(30) DEFAULT "Other 2",
+    evo1_display tinyint DEFAULT 0,
+    evo2_display tinyint DEFAULT 0,
 	KEY(user_id), UNIQUE KEY(user_id, urlkey)
 );
 
