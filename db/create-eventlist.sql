@@ -26,10 +26,16 @@ create table IF NOT EXISTS eventlist_title (
     user_id int NOT NULL,
     event_title varchar(80) NOT NULL,
     event_desc varchar(2000) NOT NULL,
-	UNIQUE KEY(user_id)
+    urlkey varchar(30) NOT NULL,
+    evdate_hdr varchar(30) DEFAULT "Date",
+    evname_hdr varchar(30) DEFAULT "Event",
+    evlocation_hdr varchar(30) DEFAULT "Location",
+    evother1_name varchar(30),
+    evother2_name varchar(30),
+	KEY(user_id), UNIQUE KEY(user_id, urlkey)
 );
 
-INSERT INTO eventlist_title (user_id, event_title, event_desc) VALUES (1, "MARRS Schedule 2022", "Mid-Atlantic Road Racing (MARRS) Schedule for 2022");
+INSERT INTO eventlist_title (user_id, event_title, event_desc, urlkey) VALUES (1, "MARRS Schedule 2022", "Mid-Atlantic Road Racing (MARRS) Schedule for 2022", "MARRS-2022");
 
 create table IF NOT EXISTS eventlist (
 	evl_item_id int NOT NULl AUTO_INCREMENT PRIMARY KEY,
@@ -39,7 +45,7 @@ create table IF NOT EXISTS eventlist (
     evname varchar(80) NOT NULL,
     evlocation varchar(80) NOT NULL,
     evother1 varchar(80),
-    evother2 varchar(8),
+    evother2 varchar(80),
     evname_url varchar(1024),
     evloc_url varchar(1024),
     evo1_url varchar(1024),
