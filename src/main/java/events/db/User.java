@@ -601,8 +601,8 @@ public class User {
             pstmt.setString(3, t.getUsername());
             pstmt.setString(4, digest);
             pstmt.setString(5, t.getEmail());
-            int rowAffected = pstmt.executeUpdate();
-            q2=pstmt.toString();
+            int rowsAffected = pstmt.executeUpdate();
+            q2="Rows Affected: "+rowsAffected+" - "+pstmt.toString();
             con.close();
         }
         catch (SQLException e) {
@@ -642,9 +642,9 @@ public class User {
             pstmt.setString(2, lastname);
             pstmt.setString(3, email);
             pstmt.setString(4, user_id);
-            int rowAffected = pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
             // System.out.println("UpdateStUserById SQL: "+pstmt.toString());
-            q2=pstmt.toString();
+            q2="Rows Affected: "+rowsAffected+" - "+pstmt.toString();
             
             con.close();
         }
@@ -683,9 +683,9 @@ public class User {
             PreparedStatement pstmt = con.prepareStatement(q);
             pstmt.setString(1, username);
 
-            int rowAffected = pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
             // System.out.println("UpdateStUserById SQL: "+pstmt.toString());
-            q2=pstmt.toString();
+            q2="Rows Affected: "+rowsAffected+" - "+pstmt.toString();
             
             con.close();
         }

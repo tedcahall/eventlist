@@ -29,9 +29,6 @@ public class UserRole {
         q+=" VALUES (?, ?) ;";
         String q2="";
         
-        //q+="'"+t.getUsername()+"','"+t.getRolename();
-        ///q+="' )";
-        // System.out.println("SQL: "+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
         }
