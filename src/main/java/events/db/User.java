@@ -20,7 +20,6 @@ public class User {
 	public void setPassword(String password) { this.password = password; }
 	public void setEmail(String email) { this.email = email; }
 	public void setBounced(Boolean bounced) { this.bounced = bounced; }
-	public void setFlagger(Boolean flagger) { this.flagger = flagger; }
 	public void setCreated(String created) { this.created = created; }
 	public void setLastlogin(String lastlogin) { this.lastlogin = lastlogin; }
 	
@@ -31,7 +30,6 @@ public class User {
 	public String getPassword() { return password; }
 	public String getEmail() { return email; }
 	public Boolean getBounced() { return bounced; }
-	public Boolean getFlagger() { return flagger; }
 	public String getCreated() { return created; }
 	public String getLastlogin() { return lastlogin; }
 	
@@ -42,7 +40,6 @@ public class User {
 	String password;
 	String email;
 	Boolean bounced;
-	Boolean flagger;
 	String created;
 	String lastlogin;
 	
@@ -175,7 +172,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         ArrayList<User> ul = new ArrayList<User>();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, flagger, created, lastlogin FROM st_user ORDER BY user_id ;";
+        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, created, lastlogin FROM st_user ORDER BY user_id ;";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -197,7 +194,6 @@ public class User {
             	String password = rs.getString("password");
             	String email = rs.getString("email");
             	Boolean bounced = rs.getBoolean("bounced");
-            	Boolean flagger = rs.getBoolean("flagger");
             	String created = rs.getString("created");
             	String lastlogin = rs.getString("lastlogin");
 
@@ -208,7 +204,6 @@ public class User {
             	u.setPassword(password);
             	u.setEmail(email);
             	u.setBounced(bounced);
-            	u.setFlagger(flagger);
             	u.setCreated(created);
             	u.setLastlogin(lastlogin);
             	ul.add(u);
@@ -287,254 +282,6 @@ public class User {
         	}
         }
         return (ul);
-	}
-	
-	public static ArrayList<User> getFlaggerStUser() {
-		Statement stmt;
-		Connection con=null;
-		String url = EvProperties.getDburl();
-		String dbu = EvProperties.getDbuser();
-        String dbp = EvProperties.getDbpswd();
-        ArrayList<User> ul = new ArrayList<User>();
-        
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, flagger, created, lastlogin FROM st_user WHERE flagger=true ORDER BY user_id ;";
-        // System.out.println("q="+q);
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e) {
-                    System.out.println("MySQL JDBC Driver Class not found "+ e);
-        }
-        try {
-            con = DriverManager.getConnection(url, dbu, dbp);
-            stmt = con.createStatement();
-            // stmt.executeUpdate("use subplaid;");
-            ResultSet rs = stmt.executeQuery(q);
-            while (rs.next()) {
-            	User u = new User();
-            	String user_id = rs.getString("user_id");
-            	String firstname = rs.getString("firstname");
-            	String lastname = rs.getString("lastname");
-            	String username = rs.getString("username");
-            	String password = rs.getString("password");
-            	String email = rs.getString("email");
-            	Boolean bounced = rs.getBoolean("bounced");
-            	Boolean flagger = rs.getBoolean("flagger");
-            	String created = rs.getString("created");
-            	String lastlogin = rs.getString("lastlogin");
-
-            	u.setUserId(user_id);
-            	u.setFirstname(firstname);
-            	u.setLastname(lastname);
-            	u.setUsername(username);
-            	u.setPassword(password);
-            	u.setEmail(email);
-            	u.setBounced(bounced);
-            	u.setFlagger(flagger);
-            	u.setCreated(created);
-            	u.setLastlogin(lastlogin);
-            	ul.add(u);
-            }
-            rs.close();
-            con.close();
-        }
-        catch (SQLException e) {
-            System.out.println("getFlaggerStUser SQL Exp:" + e);
-            System.out.println("getFlaggerStUser SQL:" + q);
-        } finally {
-        	try {
-        		if (con != null) con.close();
-        	} catch (Exception e) {
-        		System.out.println("getFlaggerStUser Close Exp:"+e);
-        	}
-        }
-        return (ul);
-	}
-	
-	public static HashMap<String, User> getFlaggerStUserWithUserTags() {
-		Statement stmt;
-		Connection con=null;
-		String url = EvProperties.getDburl();
-		String dbu = EvProperties.getDbuser();
-        String dbp = EvProperties.getDbpswd();
-        HashMap<String, User> uhm = new HashMap<String, User>();
-        
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, flagger, created, lastlogin FROM st_user WHERE flagger=true ";
-        q+="   AND user_id in (SELECT DISTINCT user_id from user_tag) ";
-        q+="   ORDER BY user_id ;";
-        // System.out.println("q="+q);
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e) {
-                    System.out.println("MySQL JDBC Driver Class not found "+ e);
-        }
-        try {
-            con = DriverManager.getConnection(url, dbu, dbp);
-            stmt = con.createStatement();
-            // stmt.executeUpdate("use subplaid;");
-            ResultSet rs = stmt.executeQuery(q);
-            while (rs.next()) {
-            	User u = new User();
-            	String user_id = rs.getString("user_id");
-            	String firstname = rs.getString("firstname");
-            	String lastname = rs.getString("lastname");
-            	String username = rs.getString("username");
-            	String password = rs.getString("password");
-            	String email = rs.getString("email");
-            	Boolean bounced = rs.getBoolean("bounced");
-            	Boolean flagger = rs.getBoolean("flagger");
-            	String created = rs.getString("created");
-            	String lastlogin = rs.getString("lastlogin");
-
-            	u.setUserId(user_id);
-            	u.setFirstname(firstname);
-            	u.setLastname(lastname);
-            	u.setUsername(username);
-            	u.setPassword(password);
-            	u.setEmail(email);
-            	u.setBounced(bounced);
-            	u.setFlagger(flagger);
-            	u.setCreated(created);
-            	u.setLastlogin(lastlogin);
-            	uhm.put(user_id, u);
-            	// System.out.println("StUser.getFlaggerStUserWithUserTags: found user: "+username+" "+user_id);
-            }
-            rs.close();
-            con.close();
-        }
-        catch (SQLException e) {
-            System.out.println("getFlaggerStUserWithUserTags SQL Exp:" + e);
-            System.out.println("getFlaggerStUserWithUserTags SQL:" + q);
-        } finally {
-        	try {
-        		if (con != null) con.close();
-        	} catch (Exception e) {
-        		System.out.println("getFlaggerStUserWithUserTags Close Exp:"+e);
-        	}
-        }
-        return (uhm);
-	}
-	
-	// SQL kind of getting messy since there can be multiple tags for one BillerMaster - and we only want to count new Subs by BillerMaster / AcctId
-	public static ArrayList<User> getNewSubsByUser() {
-		Statement stmt;
-		Connection con=null;
-		String url = EvProperties.getDburl();
-		String dbu = EvProperties.getDbuser();
-        String dbp = EvProperties.getDbpswd();
-        ArrayList<User> ul = new ArrayList<User>();
-        
-        // This is a count of count.  The subselect gets the counts per master_id/acct_id - and then the outer select rolls them up.
-        // Example: digit.io has 4 tags that all roll up to the Digit.io BillerMaster ID.  Those might show 4 new subs when first found - but should only be 1 ad the MID level
-        // The sub-select would have a count of 4 for that MasterID/AcctID - but that would be rolled up as 1 sub in the outer query and not 4.
-        // Similar issues exist with Apl*iTunes, Uber *Trip, Uber *Eats, etc where the soft descriptor can vary inside a single account.  Fun!
-        String q="SELECT uid, fn, ln, un, em, ll, bb, count(*) FROM ( ";
-        q+="SELECT a.user_id AS uid, a.firstname AS fn, a.lastname AS ln, a.username AS un, a.email AS em, a.lastlogin AS ll, bounced AS bb, count(*) AS cnt FROM st_user as a, biller_user as b ";
-        q+=" WHERE a.user_id=b.user_id ";
-        q+=" AND b.ts > date_add(a.lastlogin, INTERVAL 1 hour) ";
-        q+=" GROUP BY a.user_id, a.firstname, a.lastname, a.username, a.email, a.lastlogin, a.bounced, b.master_id, b.acct_id) AS junk";
-        q+=" GROUP BY uid, fn, ln, un, em, ll, bb; ";
-        
-        // below is the old code that worked before the concept of the BillerMaster and multiple tags per BillerMaster.
-        /*
-        String q="select a.user_id, a.firstname, a.lastname, a.username, a.email, a.lastlogin, count(*) from st_user as a, biller_user as b ";
-        q+=" where a.user_id=b.user_id ";
-        q+=" AND b.ts > date_add(a.lastlogin, INTERVAL 1 hour) ";
-        q+=" group by a.user_id, a.firstname, a.lastname, a.username, a.email, a.lastlogin; ";
-        */
-        // System.out.println("getNewSubsByUser q="+q);
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e) {
-                    System.out.println("MySQL JDBC Driver Class not found "+ e);
-        }
-        try {
-            con = DriverManager.getConnection(url, dbu, dbp);
-            stmt = con.createStatement();
-            // stmt.executeUpdate("use subplaid;");
-            ResultSet rs = stmt.executeQuery(q);
-            while (rs.next()) {
-            	User u = new User();
-            	String user_id = rs.getString("uid");
-            	String firstname = rs.getString("fn");
-            	String lastname = rs.getString("ln");
-            	String username = rs.getString("un");
-            	String password = rs.getString("count(*)");
-            	String email = rs.getString("em");
-            	String lastlogin = rs.getString("ll");
-            	Boolean bounced = rs.getBoolean("bb");
-
-            	u.setUserId(user_id);
-            	u.setFirstname(firstname);
-            	u.setLastname(lastname);
-            	u.setUsername(username);
-            	u.setPassword(password);
-            	u.setEmail(email);
-            	u.setLastlogin(lastlogin);
-            	u.setBounced(bounced);
-            	ul.add(u);
-            }
-            rs.close();
-            con.close();
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Exp:" + e);
-            System.out.println("getNewSubsByUser SQL:" + q);
-        } finally {
-        	try {
-        		if (con != null) con.close();
-        	} catch (Exception e) {
-        		System.out.println("getNewSubsByUser Close Exp:"+e);
-        	}
-        }
-        return (ul);
-	}
-	
-	// need to pass in lastlogin since the field in the st_user record has been updated by the time we need it
-	public static int getNewSubsByUserId(String uid, String lastlogin) {
-		Statement stmt;
-		Connection con=null;
-		String url = EvProperties.getDburl();
-		String dbu = EvProperties.getDbuser();
-        String dbp = EvProperties.getDbpswd();
-        int nsubs=0;
-        
-        if ("Initial Login".equals(lastlogin)) lastlogin="2099-12-31"; // Date in the far future...
-        // String q="SELECT user_id, firstname, lastname, username, password, email FROM st_user ;";
-        String q="select count(*) from st_user as a, biller_user as b ";
-        q+=" where a.user_id=b.user_id AND a.user_id="+uid;
-        q+=" AND date_sub(b.ts, INTERVAL 1 hour) > '"+lastlogin+"' ;";
-        // System.out.println("getNewSubsByUserId q="+q);
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e) {
-                    System.out.println("MySQL JDBC Driver Class not found "+ e);
-        }
-        try {
-            con = DriverManager.getConnection(url, dbu, dbp);
-            stmt = con.createStatement();
-            // stmt.executeUpdate("use subplaid;");
-            ResultSet rs = stmt.executeQuery(q);
-            while (rs.next()) {
-            	nsubs = rs.getInt("count(*)");
-            }
-            rs.close();
-            con.close();
-        }
-        catch (SQLException e) {
-            System.out.println("getNewSubsByUserId SQL Exp: " + e);
-            System.out.println("getNewSubsByUserId SQL: " + q);
-        } finally {
-        	try {
-        		if (con != null) con.close();
-        	} catch (Exception e) {
-        		System.out.println("getNewSubsByUserId Close Exp:"+e);
-        	}
-        }
-        return (nsubs);
 	}
 	
 	public static HashMap<String,User> getStUserHM() {
@@ -775,63 +522,6 @@ public class User {
         	}
         }
         return (u);
-	}
-	
-	public static ArrayList<User> getStUsersWithNoBanks() {
-		Statement stmt;
-		Connection con=null;
-		String url = EvProperties.getDburl();
-		String dbu = EvProperties.getDbuser();
-        String dbp = EvProperties.getDbpswd();
-        ArrayList<User> stl = new ArrayList<User>();
-        
-        String q="SELECT user_id, firstname, lastname, username, email, lastlogin, bounced FROM st_user ";
-        q+="  WHERE user_id NOT in (select user_id from bank) ORDER BY user_id;";
-        // System.out.println("q="+q);
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e) {
-                    System.out.println("MySQL JDBC Driver Class not found "+ e);
-        }
-        try {
-            con = DriverManager.getConnection(url, dbu, dbp);
-            stmt = con.createStatement();
-            // stmt.executeUpdate("use subplaid;");
-            ResultSet rs = stmt.executeQuery(q);
-            while (rs.next()) {
-            	User u = new User();
-            	String user_id = rs.getString("user_id");
-            	String firstname = rs.getString("firstname");
-            	String lastname = rs.getString("lastname");
-            	String username = rs.getString("username");
-            	String email = rs.getString("email");
-            	String lastlogin = rs.getString("lastlogin");
-            	Boolean bounced = rs.getBoolean("bounced");
-
-            	u.setUserId(user_id);
-            	u.setFirstname(firstname);
-            	u.setLastname(lastname);
-            	u.setUsername(username);
-            	u.setEmail(email);
-            	u.setLastlogin(lastlogin);
-            	u.setBounced(bounced);
-            	stl.add(u);
-            }
-            rs.close();
-            con.close();
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Exp:" + e);
-            System.out.println("getStUsersWithNoBanks SQL:" + q);
-        } finally {
-        	try {
-        		if (con != null) con.close();
-        	} catch (Exception e) {
-        		System.out.println("getStUsersWithNoBanks Close Exp:"+e);
-        	}
-        }
-        return (stl);
 	}
 	
 	public static ArrayList<User> getStUserCountByDate() { 
@@ -1138,49 +828,6 @@ public class User {
         		if (con != null) con.close();
         	} catch (Exception e) {
         		System.out.println("setUserBounce Close Exp:"+e);
-        		rc=""+e;
-        	}
-        }
-		return(rc);
-	}
-	
-	public static String setUserFlagger(String user_id) {
-		Connection con=null;
-		String url = EvProperties.getDburl();
-		String dbu = EvProperties.getDbuser();
-        String dbp = EvProperties.getDbpswd();
-        String rc="Success";
-        
-        String q="UPDATE st_user SET flagger=true WHERE user_id=? ;";
-        String q2="";
-		try {
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch(ClassNotFoundException e) {
-                    System.out.println("MySQL JDBC Driver Class not found "+ e);
-        }
-        try {
-            con = DriverManager.getConnection(url, dbu, dbp);
-            PreparedStatement pstmt = con.prepareStatement(q);
-            pstmt.setString(1, user_id);
-
-            int rowAffected = pstmt.executeUpdate();
-            if (rowAffected == 1) rc="Success";
-            else rc="Failure to update 'flagger' for "+user_id;
-            // System.out.println("UpdateStUserById SQL: "+pstmt.toString());
-            q2=pstmt.toString();
-            
-            con.close();
-        }
-        catch (SQLException e) {
-            System.out.println("setUserFlagger SQL Exp:" + e);
-            System.out.println("setUserFlagger SQL:" + q2);
-            rc=""+e;
-        } finally {
-        	try {
-        		if (con != null) con.close();
-        	} catch (Exception e) {
-        		System.out.println("setUserFlagger Close Exp:"+e);
         		rc=""+e;
         	}
         }
