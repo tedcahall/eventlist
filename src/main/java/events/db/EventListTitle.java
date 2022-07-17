@@ -71,9 +71,9 @@ public class EventListTitle {
             con = DriverManager.getConnection(url, dbu, dbp);
             PreparedStatement pstmt = con.prepareStatement(q);
             pstmt.setString(1, id);
-            
-            ResultSet rs = pstmt.executeQuery();
             q2=pstmt.toString();
+            ResultSet rs = pstmt.executeQuery();
+            
             // System.out.println("getEventistTitleById: q2: "+q2);
             
             int i=0;

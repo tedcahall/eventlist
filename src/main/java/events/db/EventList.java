@@ -70,10 +70,10 @@ public class EventList {
             con = DriverManager.getConnection(url, dbu, dbp);
             PreparedStatement pstmt = con.prepareStatement(q);
             pstmt.setString(1, id);
-            
-            ResultSet rs = pstmt.executeQuery();
             q2=pstmt.toString();
-            System.out.println("getEventistById: q2: "+q2);
+            ResultSet rs = pstmt.executeQuery();
+            
+            // System.out.println("getEventistById: q2: "+q2);
             
             int i=0;
             while (rs.next()) {
