@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import subs.db.AppLog;
-import subs.db.ContentCache;
+import events.db.AppLog;
 
 
-public class ServletInitializer extends HttpServlet
+public class EventsInitializer extends HttpServlet
 {
 
     /**
@@ -46,7 +45,7 @@ public class ServletInitializer extends HttpServlet
 	  	String project=ctx.getServletContextName();
 	  	String context=ctx.getContextPath();
 	  	String appPath=ctx.getRealPath("/");
-	  	// AppLog.writeAppLog("0", "0", "system", "Initialize", "Server: "+hostname+" * "+tomcat+" * "+project);
+	  	AppLog.writeAppLog("0", "0", "system", "Initialize", "Server: "+hostname+" * "+tomcat+" * "+project);
 	  	
 	  	// Write some of the DB stuff to the system log
 	  	// DBInfo.logInfo();
@@ -54,7 +53,7 @@ public class ServletInitializer extends HttpServlet
 	  	System.out.println("****************************************");
 	  	
 	  	System.out.println("ServletInitializer: Done initializing");
-	  	// AppLog.writeAppLog("0", "0", "system", "Initialize", "Done initializing: Server: "+hostname+" * "+tomcat+" * "+project+" * "+context);
+	  	AppLog.writeAppLog("0", "0", "system", "Initialize", "Done initializing: Server: "+hostname+" * "+tomcat+" * "+project+" * "+context);
 	}
 	catch (IOException e) {
 		System.out.println("*******************************************");

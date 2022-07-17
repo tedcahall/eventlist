@@ -51,7 +51,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         int count=0;
         
-        String q="SELECT count(*) FROM st_user ;";
+        String q="SELECT count(*) FROM user ;";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -91,7 +91,7 @@ public class User {
         int count=0;
         
         
-        String q="SELECT count(*) FROM st_user WHERE created=curdate();";
+        String q="SELECT count(*) FROM user WHERE created=curdate();";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -132,7 +132,7 @@ public class User {
         int count=0;
         
         
-        String q="SELECT count(*) FROM st_user WHERE DATE_ADD(created, INTERVAL 7 DAY) > curdate();";
+        String q="SELECT count(*) FROM user WHERE DATE_ADD(created, INTERVAL 7 DAY) > curdate();";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -172,7 +172,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         ArrayList<User> ul = new ArrayList<User>();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, created, lastlogin FROM st_user ORDER BY user_id ;";
+        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, created, lastlogin FROM user ORDER BY user_id ;";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -232,7 +232,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         ArrayList<User> ul = new ArrayList<User>();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, created, lastlogin FROM st_user WHERE bounced=true ORDER BY user_id ;";
+        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, created, lastlogin FROM user WHERE bounced=true ORDER BY user_id ;";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -292,7 +292,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         HashMap<String, User> uhm = new HashMap<String, User>();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced FROM st_user ;";
+        String q="SELECT user_id, firstname, lastname, username, password, email, bounced FROM user ;";
         // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -348,7 +348,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         User u = new User();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, lastlogin FROM st_user ";
+        String q="SELECT user_id, firstname, lastname, username, password, email, lastlogin FROM user ";
         q+="  WHERE email ='"+email+"' ;";
         // System.out.println("q="+q);
         try {
@@ -399,17 +399,15 @@ public class User {
 	}
 	
 	public static User getStUserByUsername(String uname) {
-		//Statement stmt;
 		Connection con=null;
 		String url = EvProperties.getDburl();
 		String dbu = EvProperties.getDbuser();
         String dbp = EvProperties.getDbpswd();
         User u = new User();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, created, lastlogin FROM st_user ";
+        String q="SELECT user_id, firstname, lastname, username, password, email, created, lastlogin FROM user ";
         q+="  WHERE username=? ;";
         String q2="";
-        // System.out.println("q="+q);
         try {
             Class.forName("com.mysql.jdbc.Driver");
         }
@@ -418,13 +416,12 @@ public class User {
         }
         try {
             con = DriverManager.getConnection(url, dbu, dbp);
-            //stmt = con.createStatement();
-            //stmt.executeUpdate("use subplaid;");
             PreparedStatement pstmt = con.prepareStatement(q);
             pstmt.setString(1, uname);
+            
+            ResultSet rs = pstmt.executeQuery();
             q2=pstmt.toString();
             // System.out.println("getStUserByUsername: q2: "+q2);
-            ResultSet rs = pstmt.executeQuery();
             
             int i=0;
             while (rs.next()) {
@@ -472,7 +469,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         User u = new User();
         
-        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, lastlogin FROM st_user ";
+        String q="SELECT user_id, firstname, lastname, username, password, email, bounced, lastlogin FROM user ";
         q+="  WHERE user_id ='"+uid+"' ;";
         // System.out.println("q="+q);
         try {
@@ -532,7 +529,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         ArrayList<User> stl = new ArrayList<User>();
         
-        String q="SELECT created, count(*) FROM st_user ";
+        String q="SELECT created, count(*) FROM user ";
         q+="  GROUP BY created ORDER BY created DESC;";
         // System.out.println("q="+q);
         try {
@@ -582,7 +579,7 @@ public class User {
         String pswd=t.getPassword();
         String digest=MD5Digest.getDigestFromString(pswd);
         
-        String q="INSERT INTO st_user ";
+        String q="INSERT INTO user ";
         q+="(firstname, lastname, username, password, email, created) ";
         q+=" VALUES (?, ?, ?, ?, ?, curdate() )";
         String q2="";
@@ -627,7 +624,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         String rc="Success";
         
-        String q="UPDATE st_user SET firstname=?, lastname=?, email=? WHERE user_id=? ;";
+        String q="UPDATE user SET firstname=?, lastname=?, email=? WHERE user_id=? ;";
         String q2="";
 		try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -670,7 +667,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         String rc="Success";
         
-        String q="UPDATE st_user SET lastlogin=now() WHERE username=? ;";
+        String q="UPDATE user SET lastlogin=now() WHERE username=? ;";
         String q2="";
 		try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -711,7 +708,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         String rc="Success";
         
-        String q="UPDATE st_user SET lastlogin=? WHERE user_id=? ;";
+        String q="UPDATE user SET lastlogin=? WHERE user_id=? ;";
         String q2="";
 		try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -758,7 +755,7 @@ public class User {
         
         String digest=MD5Digest.getDigestFromString(pswd);
         
-        String q="UPDATE st_user ";
+        String q="UPDATE user ";
         q+="SET password='"+digest+"' ";
         q+=" WHERE email='"+email+"' ;";
         // System.out.println("SQL: "+q);
@@ -797,7 +794,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         String rc="Success";
         
-        String q="UPDATE st_user SET bounced=? WHERE user_id=? ;";
+        String q="UPDATE user SET bounced=? WHERE user_id=? ;";
         String q2="";
 		try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -841,7 +838,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         String rc="Success";
         
-        String q="UPDATE st_user SET bounced=? WHERE email=? ;";
+        String q="UPDATE user SET bounced=? WHERE email=? ;";
         String q2="";
 		try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -886,7 +883,7 @@ public class User {
         String dbp = EvProperties.getDbpswd();
         String rc="Success";
         
-        String q="DELETE FROM st_user ";
+        String q="DELETE FROM user ";
         q+="  WHERE user_id='"+uid+"';";
         // System.out.println("SQL: "+q);
         try {
