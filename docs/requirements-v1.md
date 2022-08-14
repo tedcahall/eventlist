@@ -46,6 +46,7 @@
 ### Members
 - Config/Add/Edit New Event List
 - List own Event Lists
+- Is role is `admin` or `super-admin` then admin menu appears in nav
 
 ### Admin
 - User administration
