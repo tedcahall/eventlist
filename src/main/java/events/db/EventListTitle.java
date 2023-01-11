@@ -50,6 +50,140 @@ public class EventListTitle {
     public String getEvo1Disp() { return this.evo1_disp; }
     public String getEvo2Disp() { return this.evo2_disp; }
     
+    public static ArrayList<EventListTitle> getEventistTitleList() {
+    	Connection con=null;
+		String url = EvProperties.getDburl();
+		String dbu = EvProperties.getDbuser();
+        String dbp = EvProperties.getDbpswd();
+        
+        ArrayList<EventListTitle> evl = new ArrayList<EventListTitle>();
+    	
+    	String q="SELECT eventlist_id, user_id, event_title, event_desc, urlkey, evdate_hdr, evname_hdr, evlocation_hdr "+
+    	          "FROM eventlist_title;";
+    	String q2="";
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch(ClassNotFoundException e) {
+                    System.out.println("MySQL JDBC Driver Class not found "+ e);
+        }
+        try {
+            con = DriverManager.getConnection(url, dbu, dbp);
+            PreparedStatement pstmt = con.prepareStatement(q);
+            q2=pstmt.toString();
+            ResultSet rs = pstmt.executeQuery();
+            
+            // System.out.println("getEventistTitleList: q2: "+q2);
+            
+            int i=0;
+            while (rs.next()) {
+            	EventListTitle ev = new EventListTitle();
+            	String eventlist_id = rs.getString("eventlist_id");
+            	String user_id = rs.getString("user_id");
+            	String event_title = rs.getString("event_title");
+            	String event_desc = rs.getString("event_desc");
+            	String urlkey = rs.getString("urlkey");
+            	String evdate_hdr = rs.getString("evdate_hdr");
+            	String evname_hdr = rs.getString("evname_hdr");
+            	String evlocation_hdr = rs.getString("evlocation_hdr");
+            	
+            	ev.setEventListId(eventlist_id);
+            	ev.setUserId(user_id);
+            	ev.setEventTitle(event_title);
+            	ev.setEventDesc(event_desc);
+            	ev.setUrlkey(urlkey);
+            	ev.setEvdateHdr(evdate_hdr);
+            	ev.setEvnameHdr(evname_hdr);
+            	ev.setEvlocationHdr(evlocation_hdr);
+            	evl.add(ev);
+            	i++;
+            }
+            if (i==0) evl=null;
+            rs.close();
+            con.close();
+        }
+        catch (SQLException e) {
+            System.out.println("getEventistTitleList SQL Exp: " + e);
+            System.out.println("getEventistTitleList SQL:" + q2);
+        } finally {
+        	try {
+        		if (con != null) con.close();
+        	} catch (Exception e) {
+        		System.out.println("getEventistTitleList Close Exp:"+e);
+        	}
+        }
+    	
+    	return evl;
+    }
+    
+    public static ArrayList<EventListTitle> getEventistTitleListByUserId(String uid) {
+    	Connection con=null;
+		String url = EvProperties.getDburl();
+		String dbu = EvProperties.getDbuser();
+        String dbp = EvProperties.getDbpswd();
+        
+        ArrayList<EventListTitle> evl = new ArrayList<EventListTitle>();
+    	
+    	String q="SELECT eventlist_id, user_id, event_title, event_desc, urlkey, evdate_hdr, evname_hdr, evlocation_hdr "+
+    	          "FROM eventlist_title "+
+    	          "WHERE user_id=?";
+    	String q2="";
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch(ClassNotFoundException e) {
+                    System.out.println("MySQL JDBC Driver Class not found "+ e);
+        }
+        try {
+            con = DriverManager.getConnection(url, dbu, dbp);
+            PreparedStatement pstmt = con.prepareStatement(q);
+            pstmt.setString(1, uid);
+            q2=pstmt.toString();
+            ResultSet rs = pstmt.executeQuery();
+            
+            // System.out.println("getEventistTitleList: q2: "+q2);
+            
+            int i=0;
+            while (rs.next()) {
+            	EventListTitle ev = new EventListTitle();
+            	String eventlist_id = rs.getString("eventlist_id");
+            	String user_id = rs.getString("user_id");
+            	String event_title = rs.getString("event_title");
+            	String event_desc = rs.getString("event_desc");
+            	String urlkey = rs.getString("urlkey");
+            	String evdate_hdr = rs.getString("evdate_hdr");
+            	String evname_hdr = rs.getString("evname_hdr");
+            	String evlocation_hdr = rs.getString("evlocation_hdr");
+            	
+            	ev.setEventListId(eventlist_id);
+            	ev.setUserId(user_id);
+            	ev.setEventTitle(event_title);
+            	ev.setEventDesc(event_desc);
+            	ev.setUrlkey(urlkey);
+            	ev.setEvdateHdr(evdate_hdr);
+            	ev.setEvnameHdr(evname_hdr);
+            	ev.setEvlocationHdr(evlocation_hdr);
+            	evl.add(ev);
+            	i++;
+            }
+            if (i==0) evl=null;
+            rs.close();
+            con.close();
+        }
+        catch (SQLException e) {
+            System.out.println("getEventistTitleList SQL Exp: " + e);
+            System.out.println("getEventistTitleList SQL:" + q2);
+        } finally {
+        	try {
+        		if (con != null) con.close();
+        	} catch (Exception e) {
+        		System.out.println("getEventistTitleList Close Exp:"+e);
+        	}
+        }
+    	
+    	return evl;
+    }
+    
     public static EventListTitle getEventistTitleById(String id) {
     	Connection con=null;
 		String url = EvProperties.getDburl();

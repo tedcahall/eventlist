@@ -164,7 +164,7 @@ public class User {
         return (count);
 	}
 	
-	public static ArrayList<User> getAllStUser() {
+	public static ArrayList<User> getUserList() {
 		Statement stmt;
 		Connection con=null;
 		String url = EvProperties.getDburl();
@@ -183,7 +183,6 @@ public class User {
         try {
             con = DriverManager.getConnection(url, dbu, dbp);
             stmt = con.createStatement();
-            // stmt.executeUpdate("use subplaid;");
             ResultSet rs = stmt.executeQuery(q);
             while (rs.next()) {
             	User u = new User();

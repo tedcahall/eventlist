@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<Context>
+
+<Resource name="jdbc/EventList"
+      auth="Container"
+      type="javax.sql.DataSource"
+      driverClassName="com.mysql.cj.jdbc.Driver"
+      url="jdbc:mysql://eventlist.csaramtom6es.us-west-2.rds.amazonaws.com:3306/eventlist?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"
+      username="eventadmin"
+      password="EventAdmin1959$"
+      maxTotal="100"
+      maxIdle="20"
+      minIdle="5"
+      maxWaitMillis="10000"/>
+
+<Realm className="org.apache.catalina.realm.CombinedRealm" >
+
+<Realm className="org.apache.catalina.realm.DataSourceRealm"
+        dataSourceName="jdbc/EventList"
+		localDataSource="true"
+        userTable="user" userNameCol="username" userCredCol="password"
+        userRoleTable="user_roles" roleNameCol="rolename">
+        <CredentialHandler className="org.apache.catalina.realm.MessageDigestCredentialHandler"
+                algorithm="MD5"
+                iterations="1"
+                saltLength="0">
+        </CredentialHandler>
+</Realm>
+
+<Realm className="org.apache.catalina.realm.MemoryRealm" 
+  		pathname="conf/tomcat-users.xml"/>
+  
+</Realm>
+
+</Context>
+
+
+<!-- url="jdbc:mysql://nuc8.trchq.net:3306/racing?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true" -->
+<!-- url="jdbc:mysql://racing8.ch291c1juig5.us-east-1.rds.amazonaws.com:3306/racing?useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"    -->

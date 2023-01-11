@@ -58,7 +58,9 @@ public class EventList {
     	
     	ArrayList<EventList> el = new ArrayList<EventList>();
     	
-    	String q="SELECT evl_item_id, eventlist_id, user_id, evdate, evname, evlocation FROM eventlist where eventlist_id=?;";
+    	String q="SELECT evl_item_id, eventlist_id, user_id, evdate, evname, evlocation "+""
+    			+ "FROM eventlist where eventlist_id=? "+
+    			"ORDER BY evdate;";
     	String q2="";
     	try {
             Class.forName("com.mysql.cj.jdbc.Driver");

@@ -22,12 +22,18 @@ String uname=ted.getUsername();
 <html>
 <head>
 <title><%=uname%> Event List</title>
+<title>Event List Config</title>
+<%@ include file="../meta.html" %>
 </head>
 
 <body>
-<h1>Event <%=evlid%> for <%=uname %></h1>
+<%@ include file="../menu.html" %>
+<script>set_tab("events");</script>
+<%@ include file="start-mid10.html" %>
+<h1><%=evt.getEventDesc()%></h1>
 
-<table border="1">
+<div class="table-responsive">
+<table class="table table-sm table-striped table-hover table-bordered">
 <tr>
 <th colspan="3"><%=evt.getEventTitle() %></th>
 </tr><tr>
@@ -39,8 +45,8 @@ for (EventList ev : evl) {
 <td><%=ev.getEvdate() %></td><td><%=ev.getEvname() %></td><td><%=ev.getEvlocation() %></td>
 <% } %>
 </table>
+</div>
 
-
-
+<%@ include file="end-page.html" %>
 </body>
 </html>
